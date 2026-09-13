@@ -44,6 +44,36 @@ public class MeasurementService {
         return measurement;
     }
 
+    public int getMeasurementId(String abbreviation) {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM tMeasurements WHERE sAbbreviation = ?",
+                new String[]{String.valueOf(abbreviation)}
+        );
+
+        Measurement measurement = null;
+
+        if (cursor.moveToFirst()) {
+
+            measurement = new Measurement(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("pkMeasurements")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("sType")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("sAbbreviation"))
+            );
+        }
+
+        cursor.close();
+
+        if (measurement == null) {
+
+            return  -1;
+        }
+
+        return measurement.getPrimaryKey();
+    }
+
     public List<Measurement> getAllMeasurements() {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();

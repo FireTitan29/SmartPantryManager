@@ -45,12 +45,12 @@ public class PantryController {
 
                 PantryItem item = items.get(i);
 
-                Measurement item_measurement = measurements.stream()
+                Measurement itemMeasurement = measurements.stream()
                         .filter(m -> m.getPrimaryKey() == item.getMeasurementId())
                         .findFirst()
                         .orElseThrow();
 
-                float newValue = MeasurementConverter.convert(item_measurement.getAbbreviation(), appSettingsService, item.getQuantity());
+                float newValue = MeasurementConverter.convert(itemMeasurement.getAbbreviation(), appSettingsService, item.getQuantity());
 
                 item.setQuantity(newValue);
 
