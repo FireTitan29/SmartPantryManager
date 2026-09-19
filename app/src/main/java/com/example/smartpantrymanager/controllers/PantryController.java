@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.smartpantrymanager.common.MeasurementConverter;
 import com.example.smartpantrymanager.database.DatabaseHelper;
-import com.example.smartpantrymanager.models.AppSettings;
 import com.example.smartpantrymanager.models.Measurement;
 import com.example.smartpantrymanager.models.PantryItem;
 import com.example.smartpantrymanager.services.AppSettingsService;
@@ -34,6 +33,7 @@ public class PantryController {
     public List<PantryItem> getPantryItems() {
 
         List<PantryItem> items = new ArrayList<>();
+        List<PantryItem> formattedItems = new ArrayList<>();
 
         List<Measurement> measurements = measurementService.getAllMeasurements();
 
@@ -54,9 +54,28 @@ public class PantryController {
 
                 item.setQuantity(newValue);
 
+                boolean isVolumeMetric = MeasurementConverter.isVolumeMetric(itemMeasurement.getAbbreviation());
+                boolean isWeightMetric = MeasurementConverter.isWeightMetric(itemMeasurement.getAbbreviation());
+
+                // Using the metrics set in the appsettings
+                if (isVolumeMetric) {
+
+                    item.setMeasurementName(appSettingsService.getAppSettings().getVolumeUnit());
+
+                } else if (isWeightMetric) {
+
+                    item.setMeasurementName(appSettingsService.getAppSettings().getWeightUnit());
+
+                } else {
+
+                    item.setMeasurementName(" Units");
+                }
+
+                formattedItems.add(item);
+
             }
 
-            return items;
+            return formattedItems;
 
         } catch (Exception ex) {
 
@@ -64,21 +83,5 @@ public class PantryController {
             return items;
         }
     }
-
-    public boolean deletePantryItem(int primaryKey) {
-
-        try {
-
-            pantryService.deletePantryItem(primaryKey);
-            return true;
-
-        } catch (Exception ex) {
-
-            Log.d("GetPantryItems", ex.toString());
-            return false;
-        }
-    }
-
-
 
 }

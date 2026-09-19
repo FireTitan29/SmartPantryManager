@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class MeasurementConverter {
-
+    private static final List<String> weight = List.of("kg", "g", "mg");
+    private static final List<String> volume = List.of("l", "ml");
     private MeasurementConverter() {
 
     }
@@ -19,9 +20,6 @@ public final class MeasurementConverter {
         }
 
         AppSettings appSettings = appSettingsService.getAppSettings();
-
-        List<String> weight = List.of("kg", "g", "mg");
-        List<String> volume = List.of("l", "ml");
 
 
         int measurement_index;
@@ -117,5 +115,16 @@ public final class MeasurementConverter {
         }
 
         return value;
+    }
+
+
+    public static boolean isWeightMetric(String measurement) {
+
+        return weight.contains(measurement);
+    }
+
+    public static boolean isVolumeMetric(String measurement) {
+
+        return volume.contains(measurement);
     }
 }

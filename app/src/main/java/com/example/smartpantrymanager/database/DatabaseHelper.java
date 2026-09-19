@@ -111,6 +111,9 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
             db.execSQL(script);
         }
 
+        insertTestMeasurements(db);
+        insertTestPantryItems(db);
+
         printDbTables(db);
     }
 
@@ -131,5 +134,48 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         }
 
         cursor.close();
+    }
+
+
+    // Seed Test data
+    private void insertTestMeasurements(SQLiteDatabase db) {
+
+        db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS +  " (pkMeasurements, sType, sAbbreviation) VALUES (1, 'Weight', 'kg')");
+
+        db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS + " (pkMeasurements, sType, sAbbreviation) VALUES (2, 'Weight', 'g')");
+
+        db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS + " (pkMeasurements, sType, sAbbreviation) VALUES (3, 'Weight', 'mg')");
+
+        db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS + " (pkMeasurements, sType, sAbbreviation) VALUES (4, 'Volume', 'l')");
+
+        db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS + " (pkMeasurements, sType, sAbbreviation) VALUES (5, 'Volume', 'ml')");
+
+        db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS + " (pkMeasurements, sType, sAbbreviation) VALUES (6, 'Count', 'Units')");
+
+        db.execSQL("INSERT INTO " + TABLE_APP_SETTINGS + " (pkAppSettings, sWeightUnit, sVolumeUnit) VALUES (1, 'g', 'l')");
+    }
+
+    // Seed Test Data
+    private void insertTestPantryItems(SQLiteDatabase db) {
+
+        db.execSQL("INSERT INTO " + TABLE_PANTRY_ITEMS +
+                " (sName, fQuantity, fkMeasurements, dtExpiryDate) " +
+                "VALUES ('Milk', 2000, 5, '2026-09-25')");
+
+        db.execSQL("INSERT INTO " + TABLE_PANTRY_ITEMS +
+                " (sName, fQuantity, fkMeasurements, dtExpiryDate) " +
+                "VALUES ('Eggs', 12, 6, '2026-09-30')");
+
+        db.execSQL("INSERT INTO " + TABLE_PANTRY_ITEMS +
+                " (sName, fQuantity, fkMeasurements, dtExpiryDate) " +
+                "VALUES ('Flour', 500, 2, '2027-01-15')");
+
+        db.execSQL("INSERT INTO " + TABLE_PANTRY_ITEMS +
+                " (sName, fQuantity, fkMeasurements, dtExpiryDate) " +
+                "VALUES ('Sugar', 250, 2, '2027-02-01')");
+
+        db.execSQL("INSERT INTO " + TABLE_PANTRY_ITEMS +
+                " (sName, fQuantity, fkMeasurements, dtExpiryDate) " +
+                "VALUES ('Bread', 1, 6, '2026-09-22')");
     }
 }

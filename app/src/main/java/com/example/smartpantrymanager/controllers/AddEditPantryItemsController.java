@@ -31,7 +31,7 @@ public class AddEditPantryItemsController {
 
     // Get a pantry item and converts it to the measurements in the db to the measurement
     // preference of the user. Db measurements are stored in ml and g
-    public PantryItem getPantryItems(int primaryKey) {
+    public PantryItem getPantryItem(int primaryKey) {
 
         PantryItem item = new PantryItem();
 
@@ -43,14 +43,32 @@ public class AddEditPantryItemsController {
 
             PantryItem finalItem = item;
 
-            Measurement item_measurement = measurements.stream()
+            Measurement itemMeasurement = measurements.stream()
                     .filter(m -> m.getPrimaryKey() == finalItem.getMeasurementId())
                     .findFirst()
                     .orElseThrow();
 
-            float newValue = MeasurementConverter.convert(item_measurement.getAbbreviation(), appSettingsService, item.getQuantity());
+            float newValue = MeasurementConverter.convert(itemMeasurement.getAbbreviation(), appSettingsService, item.getQuantity());
 
             item.setQuantity(newValue);
+
+            boolean isVolumeMetric = MeasurementConverter.isVolumeMetric(itemMeasurement.getAbbreviation());
+            boolean isWeightMetric = MeasurementConverter.isWeightMetric(itemMeasurement.getAbbreviation());
+
+
+            // Using the metrics set in the appsettings
+            if (isVolumeMetric) {
+
+                item.setMeasurementName(appSettingsService.getAppSettings().getVolumeUnit());
+
+            } else if (isWeightMetric) {
+
+                item.setMeasurementName(appSettingsService.getAppSettings().getWeightUnit());
+
+            } else {
+
+                item.setMeasurementName("Units");
+            }
 
             return item;
 
@@ -121,6 +139,7 @@ public class AddEditPantryItemsController {
             Measurement measurement =  measurementService.getMeasurement(pantryItem.getMeasurementId());
 
             if (measurement == null) {
+
                 return false;
             }
 
@@ -146,6 +165,21 @@ public class AddEditPantryItemsController {
         } catch (Exception ex) {
 
             Log.d("UpdatePantryItem", ex.toString());
+            return false;
+        }
+    }
+
+    // Used to be in the pantry controller, but I have moved it here since it makes more sense
+    public boolean deletePantryItem(int primaryKey) {
+
+        try {
+
+            pantryService.deletePantryItem(primaryKey);
+            return true;
+
+        } catch (Exception ex) {
+
+            Log.d("GetPantryItems", ex.toString());
             return false;
         }
     }

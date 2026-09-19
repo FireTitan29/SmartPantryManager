@@ -8,6 +8,8 @@ public class PantryItem {
     private int fkMeasurements;
     private String dtExpiryDate;
 
+    // For frontend
+    private String MeasurementName;
 
     public PantryItem() {
 
@@ -59,12 +61,19 @@ public class PantryItem {
         this.fkMeasurements = measurementId;
     }
 
-
     public String getExpiryDate() {
         return dtExpiryDate;
     }
 
     public void setExpiryDate(String expiryDate) {
         this.dtExpiryDate = expiryDate;
+    }
+
+    public void setMeasurementName(String measurementName) {
+        this.MeasurementName = measurementName;
+    }
+
+    public String getMeasurementName() {
+        return MeasurementName;
     }
 }
