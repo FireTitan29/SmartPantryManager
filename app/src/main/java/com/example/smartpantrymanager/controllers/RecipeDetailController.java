@@ -106,6 +106,7 @@ public class RecipeDetailController {
             return appSettingsService.getAppSettings().getSetting("Volume");
         }
 
-        return measurement.getAbbreviation();
+        // Don't want Units to appear, it looks better to have 2 eggs vs 2 units eggs
+        return "";
     }
 }

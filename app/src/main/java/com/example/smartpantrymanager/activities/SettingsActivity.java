@@ -63,6 +63,12 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
+            } else if (item.getItemId() == R.id.navigation_recipes) {
+
+                Intent intent = new Intent(this, SuggestedRecipesActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
             }
 
             return false;

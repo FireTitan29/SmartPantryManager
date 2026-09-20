@@ -115,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Notifications"
+        android:text="Expiry Notifications"
         android:textColor="#123D24"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -124,13 +124,13 @@
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/switchNotifications"
-        android:layout_width="48dp"
-        android:layout_height="32dp"
+        android:layout_width="64dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="24dp"
-        app:thumbTint="#20A653"
-        app:trackTint="#DDF5E5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textViewNotifications" />
+        app:layout_constraintTop_toTopOf="@id/textViewNotifications"
+        app:thumbTint="#20A653"
+        app:trackTint="#DDF5E5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSaveSettings"

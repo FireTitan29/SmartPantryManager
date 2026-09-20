@@ -37,7 +37,8 @@ public class RecipeService {
                     cursor.getString(cursor.getColumnIndexOrThrow("sName")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sDescription")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sInstructions")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("bArchived"))
+                    cursor.getInt(cursor.getColumnIndexOrThrow("bArchived")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("sImageName"))
             );
 
             recipe.setIngredients(getRecipeIngredients(recipe.getPrimaryKey()));
@@ -66,7 +67,8 @@ public class RecipeService {
                     cursor.getString(cursor.getColumnIndexOrThrow("sName")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sDescription")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sInstructions")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("bArchived"))
+                    cursor.getInt(cursor.getColumnIndexOrThrow("bArchived")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("sImageName"))
             );
 
             recipe.setIngredients(getRecipeIngredients(recipe.getPrimaryKey()));
@@ -84,7 +86,7 @@ public class RecipeService {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM tRecipes WHERE bArchived = 0",
+                "SELECT * FROM tRecipes WHERE bArchived = 0 ORDER BY sName ASC",
                 null
         );
 
@@ -97,7 +99,8 @@ public class RecipeService {
                     cursor.getString(cursor.getColumnIndexOrThrow("sName")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sDescription")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sInstructions")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("bArchived"))
+                    cursor.getInt(cursor.getColumnIndexOrThrow("bArchived")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("sImageName"))
             );
 
             recipe.setIngredients(getRecipeIngredients(recipe.getPrimaryKey()));

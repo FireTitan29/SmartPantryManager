@@ -53,6 +53,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
                     "sName TEXT NOT NULL," +
                     "sDescription TEXT," +
                     "sInstructions TEXT NOT NULL," +
+                    "sImageName TEXT NOT NULL," +
                     "bArchived INTEGER NOT NULL DEFAULT 0)";
 
     private static final String CREATE_TABLE_RECIPE_INGREDIENTS =
@@ -215,13 +216,14 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     // Helper function will make it easier to insert recipes, we return an int because we need
     // to know what pk the recipe has to insert the ingredients
-    private int insertRecipe(SQLiteDatabase db, String name, String description, String instructions) {
+    private int insertRecipe(SQLiteDatabase db, String name, String description, String instructions, String imageName) {
 
         android.content.ContentValues values = new android.content.ContentValues();
 
         values.put("sName", name);
         values.put("sDescription", description);
         values.put("sInstructions", instructions);
+        values.put("sImageName", imageName);
         values.put("bArchived", 0);
 
         return (int) db.insert(TABLE_RECIPES, null, values);
@@ -249,7 +251,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // Pastas
         int spaghettiBolognese = insertRecipe(db, "Spaghetti Bolognese",
                 "A simple spaghetti dish with mince and tomato sauce.",
-                "Cook pasta. Fry onion, garlic and mince. Add tomatoes and simmer. Serve with pasta.");
+                "Cook pasta. Fry onion, garlic and mince. Add tomatoes and simmer. Serve with pasta.",
+                "Spaghetti_Bolognese.jpg");
         insertRecipeIngredient(db, spaghettiBolognese, 1, 200, 2);
         insertRecipeIngredient(db, spaghettiBolognese, 2, 250, 2);
         insertRecipeIngredient(db, spaghettiBolognese, 3, 200, 2);
@@ -259,7 +262,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int creamyChickenPasta = insertRecipe(db, "Creamy Chicken Pasta",
                 "Pasta with chicken in a simple creamy cheese sauce.",
-                "Cook pasta. Cook chicken with onion and garlic. Add milk and cheese and stir until creamy. Combine with pasta.");
+                "Cook pasta. Cook chicken with onion and garlic. Add milk and cheese and stir until creamy. Combine with pasta.",
+                "Creamy_Chicken_Pasta.jpg");
         insertRecipeIngredient(db, creamyChickenPasta, 1, 200, 2);
         insertRecipeIngredient(db, creamyChickenPasta, 7, 250, 2);
         insertRecipeIngredient(db, creamyChickenPasta, 8, 150, 5);
@@ -269,7 +273,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int tomatoCheesePasta = insertRecipe(db, "Tomato Cheese Pasta",
                 "A simple pasta dish with tomato and cheese.",
-                "Cook pasta. Fry onion and garlic, add tomatoes and simmer. Stir through pasta and top with cheese.");
+                "Cook pasta. Fry onion and garlic, add tomatoes and simmer. Stir through pasta and top with cheese.",
+                "Tomato_Cheese_pasta.jpg");
         insertRecipeIngredient(db, tomatoCheesePasta, 1, 200, 2);
         insertRecipeIngredient(db, tomatoCheesePasta, 3, 250, 2);
         insertRecipeIngredient(db, tomatoCheesePasta, 9, 100, 2);
@@ -279,7 +284,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int baconPasta = insertRecipe(db, "Bacon Pasta",
                 "Pasta with bacon, cheese and a creamy sauce.",
-                "Cook pasta. Fry bacon, onion and garlic. Add milk and cheese, then mix with pasta.");
+                "Cook pasta. Fry bacon, onion and garlic. Add milk and cheese, then mix with pasta.",
+                "Bacon_Pasta.jpg");
         insertRecipeIngredient(db, baconPasta, 1, 200, 2);
         insertRecipeIngredient(db, baconPasta, 10, 150, 2);
         insertRecipeIngredient(db, baconPasta, 9, 100, 2);
@@ -289,7 +295,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chickenTomatoPasta = insertRecipe(db, "Chicken Tomato Pasta",
                 "Pasta with chicken and a simple tomato sauce.",
-                "Cook pasta. Cook chicken with onion and garlic. Add tomatoes and simmer before combining with pasta.");
+                "Cook pasta. Cook chicken with onion and garlic. Add tomatoes and simmer before combining with pasta.",
+                "Chicken_Tomato_Pasta.jpg");
         insertRecipeIngredient(db, chickenTomatoPasta, 1, 200, 2);
         insertRecipeIngredient(db, chickenTomatoPasta, 7, 200, 2);
         insertRecipeIngredient(db, chickenTomatoPasta, 3, 200, 2);
@@ -301,7 +308,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // American
         int cheeseburger = insertRecipe(db, "Cheeseburger",
                 "A simple homemade cheeseburger.",
-                "Shape and cook mince into a burger patty. Place in bun with cheese, tomato, lettuce and onion.");
+                "Shape and cook mince into a burger patty. Place in bun with cheese, tomato, lettuce and onion.",
+                "Cheese_Burger.jpg");
         insertRecipeIngredient(db, cheeseburger, 11, 1, 6);
         insertRecipeIngredient(db, cheeseburger, 2, 150, 2);
         insertRecipeIngredient(db, cheeseburger, 9, 50, 2);
@@ -311,7 +319,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chickenBurger = insertRecipe(db, "Chicken Burger",
                 "A simple chicken burger with cheese and salad.",
-                "Cook chicken in oil. Place chicken in bun with cheese, tomato and lettuce.");
+                "Cook chicken in oil. Place chicken in bun with cheese, tomato and lettuce.",
+                "Chicken_Burger.jpg");
         insertRecipeIngredient(db, chickenBurger, 11, 1, 6);
         insertRecipeIngredient(db, chickenBurger, 7, 150, 2);
         insertRecipeIngredient(db, chickenBurger, 9, 50, 2);
@@ -321,7 +330,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int americanPancakes = insertRecipe(db, "American Pancakes",
                 "Fluffy homemade pancakes.",
-                "Mix flour, milk, eggs and sugar. Fry portions in butter until golden.");
+                "Mix flour, milk, eggs and sugar. Fry portions in butter until golden.",
+                "American_Pancakes.jpg");
         insertRecipeIngredient(db, americanPancakes, 14, 150, 2);
         insertRecipeIngredient(db, americanPancakes, 8, 200, 5);
         insertRecipeIngredient(db, americanPancakes, 15, 2, 6);
@@ -330,7 +340,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int macAndCheese = insertRecipe(db, "Mac and Cheese",
                 "Simple pasta with a creamy cheese sauce.",
-                "Cook pasta. Melt butter, add flour and milk to make a sauce. Stir in cheese and pasta.");
+                "Cook pasta. Melt butter, add flour and milk to make a sauce. Stir in cheese and pasta.",
+                "Mac_and_Cheese.jpg");
         insertRecipeIngredient(db, macAndCheese, 1, 200, 2);
         insertRecipeIngredient(db, macAndCheese, 9, 150, 2);
         insertRecipeIngredient(db, macAndCheese, 8, 200, 5);
@@ -339,7 +350,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int loadedFries = insertRecipe(db, "Loaded Fries",
                 "Crispy potatoes topped with mince, tomato and cheese.",
-                "Cook potato until crispy. Cook mince with onion. Add mince, tomato and cheese over the potatoes.");
+                "Cook potato until crispy. Cook mince with onion. Add mince, tomato and cheese over the potatoes.",
+                "Loaded_Fries.jpg");
         insertRecipeIngredient(db, loadedFries, 13, 300, 2);
         insertRecipeIngredient(db, loadedFries, 9, 100, 2);
         insertRecipeIngredient(db, loadedFries, 2, 150, 2);
@@ -351,7 +363,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // Desserts
         int chocolateCake = insertRecipe(db, "Chocolate Cake",
                 "A simple homemade chocolate cake.",
-                "Mix ingredients together. Pour into a cake tin and bake until cooked.");
+                "Mix ingredients together. Pour into a cake tin and bake until cooked.",
+                "Chocolate_Cake.jpg");
         insertRecipeIngredient(db, chocolateCake, 14, 150, 2);
         insertRecipeIngredient(db, chocolateCake, 16, 100, 2);
         insertRecipeIngredient(db, chocolateCake, 18, 30, 2);
@@ -361,7 +374,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int bananaPancakes = insertRecipe(db, "Banana Pancakes",
                 "Simple pancakes made with banana.",
-                "Mash bananas and mix with remaining ingredients. Fry small pancakes in butter.");
+                "Mash bananas and mix with remaining ingredients. Fry small pancakes in butter.",
+                "Banana_Pancakes.jpg");
         insertRecipeIngredient(db, bananaPancakes, 19, 2, 6);
         insertRecipeIngredient(db, bananaPancakes, 15, 2, 6);
         insertRecipeIngredient(db, bananaPancakes, 14, 100, 2);
@@ -371,7 +385,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chocolateBrownies = insertRecipe(db, "Chocolate Brownies",
                 "Simple homemade chocolate brownies.",
-                "Mix ingredients together. Pour into a baking tray and bake until set.");
+                "Mix ingredients together. Pour into a baking tray and bake until set.",
+                "Chocolate_Brownies.jpg");
         insertRecipeIngredient(db, chocolateBrownies, 14, 120, 2);
         insertRecipeIngredient(db, chocolateBrownies, 16, 100, 2);
         insertRecipeIngredient(db, chocolateBrownies, 18, 40, 2);
@@ -380,7 +395,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int appleCrumble = insertRecipe(db, "Apple Crumble",
                 "Baked apples with a simple crumble topping.",
-                "Slice apples and place in a baking dish. Mix flour, sugar and butter into crumbs. Place over apples and bake.");
+                "Slice apples and place in a baking dish. Mix flour, sugar and butter into crumbs. Place over apples and bake.",
+                "Apple_Crumble.jpg");
         insertRecipeIngredient(db, appleCrumble, 20, 3, 6);
         insertRecipeIngredient(db, appleCrumble, 14, 100, 2);
         insertRecipeIngredient(db, appleCrumble, 16, 80, 2);
@@ -388,7 +404,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chocolateMilkshake = insertRecipe(db, "Chocolate Milkshake",
                 "A simple chocolate and banana milkshake.",
-                "Blend all ingredients until smooth.");
+                "Blend all ingredients until smooth.",
+                "Chocolate_Milkshake.jpg");
         insertRecipeIngredient(db, chocolateMilkshake, 8, 300, 5);
         insertRecipeIngredient(db, chocolateMilkshake, 19, 1, 6);
         insertRecipeIngredient(db, chocolateMilkshake, 18, 20, 2);
@@ -398,7 +415,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // Breakfasts
         int baconAndEggs = insertRecipe(db, "Bacon and Eggs",
                 "A simple breakfast of bacon, eggs and toast.",
-                "Fry bacon and eggs. Toast bread and serve together.");
+                "Fry bacon and eggs. Toast bread and serve together.",
+                "Bacon_and_Eggs.jpg");
         insertRecipeIngredient(db, baconAndEggs, 10, 100, 2);
         insertRecipeIngredient(db, baconAndEggs, 15, 2, 6);
         insertRecipeIngredient(db, baconAndEggs, 21, 2, 6);
@@ -406,7 +424,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int breakfastSandwich = insertRecipe(db, "Breakfast Sandwich",
                 "A simple breakfast sandwich with eggs, bacon and cheese.",
-                "Cook eggs and bacon. Place in bread with cheese and tomato.");
+                "Cook eggs and bacon. Place in bread with cheese and tomato.",
+                "Breakfast_Sandwich.jpg");
         insertRecipeIngredient(db, breakfastSandwich, 21, 2, 6);
         insertRecipeIngredient(db, breakfastSandwich, 15, 2, 6);
         insertRecipeIngredient(db, breakfastSandwich, 10, 80, 2);
@@ -415,7 +434,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int scrambledEggs = insertRecipe(db, "Scrambled Eggs on Toast",
                 "Scrambled eggs served on toast.",
-                "Beat eggs with milk. Cook slowly in butter and serve on toast.");
+                "Beat eggs with milk. Cook slowly in butter and serve on toast.",
+                "Scrambled_Eggs_On_Toast.jpg");
         insertRecipeIngredient(db, scrambledEggs, 15, 2, 6);
         insertRecipeIngredient(db, scrambledEggs, 8, 50, 5);
         insertRecipeIngredient(db, scrambledEggs, 21, 2, 6);
@@ -423,7 +443,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int bananaOats = insertRecipe(db, "Banana Oats",
                 "Warm oats with banana and milk.",
-                "Cook oats with milk. Add sliced banana and sugar.");
+                "Cook oats with milk. Add sliced banana and sugar.",
+                "Banana_Oats.jpg");
         insertRecipeIngredient(db, bananaOats, 22, 100, 2);
         insertRecipeIngredient(db, bananaOats, 8, 250, 5);
         insertRecipeIngredient(db, bananaOats, 19, 1, 6);
@@ -431,7 +452,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int breakfastPancakes = insertRecipe(db, "Breakfast Pancakes",
                 "Simple homemade breakfast pancakes.",
-                "Mix ingredients and fry pancakes in butter.");
+                "Mix ingredients and fry pancakes in butter.",
+                "Breakfast_Pancakes.jpg");
         insertRecipeIngredient(db, breakfastPancakes, 14, 150, 2);
         insertRecipeIngredient(db, breakfastPancakes, 8, 200, 5);
         insertRecipeIngredient(db, breakfastPancakes, 15, 2, 6);
@@ -442,7 +464,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // Lunches
         int chickenSandwich = insertRecipe(db, "Chicken Sandwich",
                 "A simple chicken sandwich with salad.",
-                "Cook chicken. Place chicken, lettuce, tomato and cheese between bread.");
+                "Cook chicken. Place chicken, lettuce, tomato and cheese between bread.",
+                "Chicken_Sandwich.jpg");
         insertRecipeIngredient(db, chickenSandwich, 21, 2, 6);
         insertRecipeIngredient(db, chickenSandwich, 7, 150, 2);
         insertRecipeIngredient(db, chickenSandwich, 12, 30, 2);
@@ -451,7 +474,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int hamCheeseSandwich = insertRecipe(db, "Ham and Cheese Sandwich",
                 "A simple ham and cheese sandwich.",
-                "Add ham, cheese, tomato and lettuce between bread.");
+                "Add ham, cheese, tomato and lettuce between bread.",
+                "Ham_and_Cheese_Sandwich.jpg");
         insertRecipeIngredient(db, hamCheeseSandwich, 21, 2, 6);
         insertRecipeIngredient(db, hamCheeseSandwich, 24, 100, 2);
         insertRecipeIngredient(db, hamCheeseSandwich, 9, 50, 2);
@@ -460,7 +484,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chickenRiceBowl = insertRecipe(db, "Chicken Rice Bowl",
                 "Chicken served with rice and vegetables.",
-                "Cook rice. Cook chicken with onion and tomato. Serve over rice.");
+                "Cook rice. Cook chicken with onion and tomato. Serve over rice.",
+                "Chicken_Rice_Bowl.jpg");
         insertRecipeIngredient(db, chickenRiceBowl, 23, 200, 2);
         insertRecipeIngredient(db, chickenRiceBowl, 7, 200, 2);
         insertRecipeIngredient(db, chickenRiceBowl, 3, 100, 2);
@@ -469,7 +494,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int minceSandwich = insertRecipe(db, "Mince Sandwich",
                 "Cooked mince served in bread with cheese and tomato.",
-                "Cook mince with onion. Place in bread with tomato and cheese.");
+                "Cook mince with onion. Place in bread with tomato and cheese.",
+                "Mince_Sandwich.jpg");
         insertRecipeIngredient(db, minceSandwich, 21, 2, 6);
         insertRecipeIngredient(db, minceSandwich, 2, 150, 2);
         insertRecipeIngredient(db, minceSandwich, 3, 50, 2);
@@ -478,7 +504,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int cheeseToastie = insertRecipe(db, "Cheese Toastie",
                 "A simple toasted cheese sandwich.",
-                "Butter bread. Add cheese and tomato. Toast until golden and cheese has melted.");
+                "Butter bread. Add cheese and tomato. Toast until golden and cheese has melted.",
+                "Cheese_Toastie.jpg");
         insertRecipeIngredient(db, cheeseToastie, 21, 2, 6);
         insertRecipeIngredient(db, cheeseToastie, 9, 100, 2);
         insertRecipeIngredient(db, cheeseToastie, 17, 20, 2);
@@ -488,7 +515,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         // Home-Style Meals
         int cottagePie = insertRecipe(db, "Cottage Pie",
                 "Mince and vegetables topped with mashed potato.",
-                "Cook mince with onion and tomato. Mash potatoes. Place potatoes over mince, top with cheese and bake.");
+                "Cook mince with onion and tomato. Mash potatoes. Place potatoes over mince, top with cheese and bake.",
+                "Cottage_Pie.jpg");
         insertRecipeIngredient(db, cottagePie, 2, 250, 2);
         insertRecipeIngredient(db, cottagePie, 13, 300, 2);
         insertRecipeIngredient(db, cottagePie, 4, 100, 2);
@@ -497,7 +525,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chickenAndRice = insertRecipe(db, "Chicken and Rice",
                 "Simple chicken cooked with onion and tomato served with rice.",
-                "Cook rice. Fry chicken and onion, add tomato and cook through. Serve with rice.");
+                "Cook rice. Fry chicken and onion, add tomato and cook through. Serve with rice.",
+                "Chicken_and_Rice.jpg");
         insertRecipeIngredient(db, chickenAndRice, 7, 250, 2);
         insertRecipeIngredient(db, chickenAndRice, 23, 200, 2);
         insertRecipeIngredient(db, chickenAndRice, 4, 100, 2);
@@ -506,7 +535,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int sausageMash = insertRecipe(db, "Sausage and Mash",
                 "Sausages served with mashed potatoes and onion.",
-                "Cook sausages. Boil and mash potatoes with milk and butter. Fry onion and serve together.");
+                "Cook sausages. Boil and mash potatoes with milk and butter. Fry onion and serve together.",
+                "Sasuage_and_Mash.jpg");
         insertRecipeIngredient(db, sausageMash, 25, 3, 6);
         insertRecipeIngredient(db, sausageMash, 13, 300, 2);
         insertRecipeIngredient(db, sausageMash, 8, 100, 5);
@@ -515,7 +545,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int spaghettiMeatballs = insertRecipe(db, "Spaghetti and Meatballs",
                 "Spaghetti served with simple homemade meatballs and tomato sauce.",
-                "Form mince into meatballs and cook. Fry onion and garlic, add tomatoes and simmer. Serve with pasta and meatballs.");
+                "Form mince into meatballs and cook. Fry onion and garlic, add tomatoes and simmer. Serve with pasta and meatballs.",
+                "Spaghetti_and_Meatballs.jpg");
         insertRecipeIngredient(db, spaghettiMeatballs, 1, 200, 2);
         insertRecipeIngredient(db, spaghettiMeatballs, 2, 250, 2);
         insertRecipeIngredient(db, spaghettiMeatballs, 3, 200, 2);
@@ -525,7 +556,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         int chickenPotato = insertRecipe(db, "Chicken and Potato",
                 "Chicken and potatoes cooked with onion and tomato.",
-                "Cook potatoes until soft. Cook chicken with onion and tomato. Combine and serve.");
+                "Cook potatoes until soft. Cook chicken with onion and tomato. Combine and serve.",
+                "Chicken_and_Potato.jpg");
         insertRecipeIngredient(db, chickenPotato, 7, 250, 2);
         insertRecipeIngredient(db, chickenPotato, 13, 300, 2);
         insertRecipeIngredient(db, chickenPotato, 4, 100, 2);

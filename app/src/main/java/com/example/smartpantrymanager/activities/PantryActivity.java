@@ -58,11 +58,16 @@ public class PantryActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.navigation_pantry) {
-
                 return true;
-            }
 
-            if (item.getItemId() == R.id.navigation_settings) {
+            } else if (item.getItemId() == R.id.navigation_recipes) {
+
+                Intent intent = new Intent(this, SuggestedRecipesActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.navigation_settings) {
 
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);

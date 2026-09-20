@@ -8,6 +8,7 @@ public class Recipe {
     private int pkRecipes;
     private String sName;
     private String sDescription;
+    private String sImageName;
     private String sInstructions;
     private int bArchived;
 
@@ -18,19 +19,20 @@ public class Recipe {
 
     }
 
-    public Recipe(int primaryKey, String name, String description, String instructions, int archived) {
+    public Recipe(int primaryKey, String name, String description, String instructions, int archived, String imageName) {
 
         this.pkRecipes = primaryKey;
         this.sName = name;
         this.sDescription = description;
         this.sInstructions = instructions;
         this.bArchived = archived;
+        this.sImageName = imageName;
 
     }
 
-    public Recipe(int primaryKey, String name, String description, String instructions, int archived, List<RecipeIngredient> ingredientList) {
+    public Recipe(int primaryKey, String name, String description, String instructions, int archived, String imageName, List<RecipeIngredient> ingredientList) {
 
-        this(primaryKey, name, description, instructions, archived);
+        this(primaryKey, name, description, instructions, archived, imageName);
         this.ingredientList = ingredientList;
 
     }
@@ -90,6 +92,14 @@ public class Recipe {
 
     public void removeIngredient(RecipeIngredient ingredient) {
         ingredientList.remove(ingredient);
+    }
+
+    public String getImageName() {
+        return sImageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.sImageName = imageName;
     }
 
 }
