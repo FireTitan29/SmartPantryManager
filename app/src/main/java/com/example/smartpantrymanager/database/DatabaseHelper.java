@@ -86,8 +86,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_APP_SETTINGS =
             "CREATE TABLE IF NOT EXISTS " + TABLE_APP_SETTINGS +
                     "(pkAppSettings INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "sWeightUnit TEXT NOT NULL, " +
-                    "sVolumeUnit TEXT NOT NULL)";
+                    "sName TEXT NOT NULL, " +
+                    "sValue TEXT NOT NULL)";
 
     public DatabaseHelper(Context context) {
 
@@ -153,7 +153,10 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO " + TABLE_MEASUREMENTS + " (pkMeasurements, sType, sAbbreviation) VALUES (6, 'Count', 'Units')");
 
-        db.execSQL("INSERT INTO " + TABLE_APP_SETTINGS + " (pkAppSettings, sWeightUnit, sVolumeUnit) VALUES (1, 'g', 'l')");
+        // AppSettings Insert
+        db.execSQL("INSERT INTO " + TABLE_APP_SETTINGS + " (pkAppSettings, sName, sValue) VALUES (1, 'Weight', 'g')");
+        db.execSQL("INSERT INTO " + TABLE_APP_SETTINGS + " (pkAppSettings, sName, sValue) VALUES (2, 'Volume', 'l')");
+        db.execSQL("INSERT INTO " + TABLE_APP_SETTINGS + " (pkAppSettings, sName, sValue) VALUES (3, 'Notifications', 'On')");
     }
 
     // Seed Test Data
@@ -247,12 +250,12 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         int spaghettiBolognese = insertRecipe(db, "Spaghetti Bolognese",
                 "A simple spaghetti dish with mince and tomato sauce.",
                 "Cook pasta. Fry onion, garlic and mince. Add tomatoes and simmer. Serve with pasta.");
-        insertRecipeIngredient(db, spaghettiBolognese, 1, 200, 2); // Pasta
-        insertRecipeIngredient(db, spaghettiBolognese, 2, 250, 2); // Mince
-        insertRecipeIngredient(db, spaghettiBolognese, 3, 200, 2); // Tomato
-        insertRecipeIngredient(db, spaghettiBolognese, 4, 100, 2); // Onion
-        insertRecipeIngredient(db, spaghettiBolognese, 5, 10, 2);  // Garlic
-        insertRecipeIngredient(db, spaghettiBolognese, 6, 20, 5);  // Oil
+        insertRecipeIngredient(db, spaghettiBolognese, 1, 200, 2);
+        insertRecipeIngredient(db, spaghettiBolognese, 2, 250, 2);
+        insertRecipeIngredient(db, spaghettiBolognese, 3, 200, 2);
+        insertRecipeIngredient(db, spaghettiBolognese, 4, 100, 2);
+        insertRecipeIngredient(db, spaghettiBolognese, 5, 10, 2);
+        insertRecipeIngredient(db, spaghettiBolognese, 6, 20, 5);
 
         int creamyChickenPasta = insertRecipe(db, "Creamy Chicken Pasta",
                 "Pasta with chicken in a simple creamy cheese sauce.",

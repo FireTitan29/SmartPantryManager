@@ -14,6 +14,7 @@ import com.example.smartpantrymanager.controllers.PantryController;
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.models.PantryItem;
 import com.example.smartpantrymanager.services.MeasurementService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class PantryActivity extends AppCompatActivity {
     private RecyclerView recyclerViewPantryItems;
     private PantryController pantryController;
     private Button buttonAddIngredient;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,28 @@ public class PantryActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, AddEditPantryItemActivity.class);
             startActivity(intent);
+        });
+
+        // Navigation at the bottom of the page logic
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_pantry);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            if (item.getItemId() == R.id.navigation_pantry) {
+
+                return true;
+            }
+
+            if (item.getItemId() == R.id.navigation_settings) {
+
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+
+            return false;
         });
 
     }

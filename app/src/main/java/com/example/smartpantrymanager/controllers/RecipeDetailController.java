@@ -97,13 +97,13 @@ public class RecipeDetailController {
 
         if (measurement.getAbbreviation().equals("g") || measurement.getAbbreviation().equals("kg") || measurement.getAbbreviation().equals("mg")) {
 
-            return appSettingsService.getAppSettings().getWeightUnit();
+            return appSettingsService.getAppSettings().getSetting("Weight");
 
         }
 
         if (measurement.getAbbreviation().equals("ml") || measurement.getAbbreviation().equals("l")) {
 
-            return appSettingsService.getAppSettings().getVolumeUnit();
+            return appSettingsService.getAppSettings().getSetting("Volume");
         }
 
         return measurement.getAbbreviation();

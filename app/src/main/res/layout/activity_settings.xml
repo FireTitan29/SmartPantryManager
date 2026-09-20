@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <View
+        android:id="@+id/settingsHeader"
+        android:layout_width="0dp"
+        android:layout_height="166dp"
+        android:background="#1C9A4D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSettingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:text="Settings"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSettingsSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Customise your pantry"
+        android:textColor="#E8F5EC"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSettingsTitle" />
+
+    <TextView
+        android:id="@+id/textViewUnitsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:text="Measurement Units"
+        android:textColor="#123D24"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
+
+    <TextView
+        android:id="@+id/textViewWeightLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="Weight Unit"
+        android:textColor="#123D24"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewUnitsTitle" />
+
+    <Spinner
+        android:id="@+id/spinnerWeightUnit"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewWeightLabel" />
+
+    <TextView
+        android:id="@+id/textViewVolumeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="Volume Unit"
+        android:textColor="#123D24"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewWeightLabel" />
+
+    <Spinner
+        android:id="@+id/spinnerVolumeUnit"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewVolumeLabel" />
+
+    <View
+        android:id="@+id/settingsDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
+        android:background="#DDE8E0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewVolumeLabel" />
+
+    <TextView
+        android:id="@+id/textViewNotifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Notifications"
+        android:textColor="#123D24"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsDivider" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchNotifications"
+        android:layout_width="48dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="24dp"
+        app:thumbTint="#20A653"
+        app:trackTint="#DDF5E5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewNotifications" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSaveSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
+        android:minHeight="52dp"
+        android:text="Save Settings"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="#20A653"
+        app:cornerRadius="26dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/bottomNavigationShadow"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#176B3A"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/bottomNavigationContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            app:itemIconTint="#20A653"
+            app:itemTextColor="#20A653"
+            app:menu="@menu/bottom_navigation_menu" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

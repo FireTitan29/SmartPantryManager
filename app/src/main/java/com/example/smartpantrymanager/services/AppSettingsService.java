@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.models.AppSettings;
 
+import java.util.Map;
+
 public class AppSettingsService {
 
     private DatabaseHelper dbHelper;
@@ -21,19 +23,23 @@ public class AppSettingsService {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM tAppSettings LIMIT 1",
+                "SELECT * FROM tAppSettings",
                 null
         );
 
-        AppSettings appSettings = null;
+        AppSettings appSettings = new AppSettings();
 
         if (cursor.moveToFirst()) {
 
-            appSettings = new AppSettings(
-                    cursor.getInt(cursor.getColumnIndexOrThrow("pkAppSettings")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("sWeightUnit")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("sVolumeUnit"))
-            );
+            do {
+
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("sName"));
+
+                String value = cursor.getString(cursor.getColumnIndexOrThrow("sValue"));
+
+                appSettings.setSetting(name, value);
+
+            } while (cursor.moveToNext());
         }
 
         cursor.close();
@@ -46,18 +52,21 @@ public class AppSettingsService {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
+        boolean successful = true;
 
-        values.put("sWeightUnit", appSettings.getWeightUnit());
-        values.put("sVolumeUnit", appSettings.getVolumeUnit());
+        for (Map.Entry<String, String> setting : appSettings.getSettings().entrySet()) {
 
-        int rowsUpdated = db.update(
-                "tAppSettings",
-                values,
-                "pkAppSettings = ?",
-                new String[]{String.valueOf(appSettings.getPrimaryKey())}
-        );
+            ContentValues values = new ContentValues();
+            values.put("sValue", setting.getValue());
 
-        return rowsUpdated > 0;
+            int rowsUpdated = db.update("tAppSettings", values, "sName = ?", new String[]{setting.getKey()});
+
+            if (rowsUpdated == 0) {
+
+                successful = false;
+            }
+        }
+
+        return successful;
     }
 }

@@ -60,11 +60,11 @@ public class PantryController {
                 // Using the metrics set in the appsettings
                 if (isVolumeMetric) {
 
-                    item.setMeasurementName(appSettingsService.getAppSettings().getVolumeUnit());
+                    item.setMeasurementName(appSettingsService.getAppSettings().getSetting("Volume"));
 
                 } else if (isWeightMetric) {
 
-                    item.setMeasurementName(appSettingsService.getAppSettings().getWeightUnit());
+                    item.setMeasurementName(appSettingsService.getAppSettings().getSetting("Weight"));
 
                 } else {
 

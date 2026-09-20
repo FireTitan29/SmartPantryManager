@@ -29,12 +29,12 @@ public final class MeasurementConverter {
         if (weight.contains(measurement)) {
 
             measurement_index = weight.indexOf(measurement);
-            appsetting_index = weight.indexOf(appSettings.getWeightUnit());
+            appsetting_index = weight.indexOf(appSettings.getSetting("Weight").toLowerCase());
 
         } else {
 
             measurement_index = volume.indexOf(measurement);
-            appsetting_index = volume.indexOf(appSettings.getVolumeUnit());
+            appsetting_index = volume.indexOf(appSettings.getSetting("Volume").toLowerCase());
         }
 
         int modifyBy = 0;

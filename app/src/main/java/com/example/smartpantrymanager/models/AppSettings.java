@@ -1,27 +1,21 @@
 package com.example.smartpantrymanager.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AppSettings {
 
     private int pkAppSettings;
-    private String sWeightUnit;
-    private String sVolumeUnit;
-
+    private Map<String, String> settings;
 
     public AppSettings() {
-
+        settings = new HashMap<>();
     }
 
-
-    public AppSettings(int primaryKey, String weightUnit, String volumeUnit) {
-
+    public AppSettings(int primaryKey, Map<String, String> settings) {
         this.pkAppSettings = primaryKey;
-        this.sWeightUnit = weightUnit;
-        this.sVolumeUnit = volumeUnit;
-
+        this.settings = settings;
     }
-
-
-    // Getters and Setters
 
     public int getPrimaryKey() {
         return pkAppSettings;
@@ -31,21 +25,19 @@ public class AppSettings {
         this.pkAppSettings = primaryKey;
     }
 
-
-    public String getWeightUnit() {
-        return sWeightUnit;
+    public Map<String, String> getSettings() {
+        return settings;
     }
 
-    public void setWeightUnit(String weightUnit) {
-        this.sWeightUnit = weightUnit;
+    public void setSettings(Map<String, String> settings) {
+        this.settings = settings;
     }
 
-
-    public String getVolumeUnit() {
-        return sVolumeUnit;
+    public String getSetting(String name) {
+        return settings.get(name);
     }
 
-    public void setVolumeUnit(String volumeUnit) {
-        this.sVolumeUnit = volumeUnit;
+    public void setSetting(String name, String value) {
+        settings.put(name, value);
     }
 }
