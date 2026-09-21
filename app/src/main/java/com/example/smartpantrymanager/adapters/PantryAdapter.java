@@ -50,6 +50,15 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
             holder.textViewExpiry.setText("No Expiry Set");
         }
 
+        if (item.isExpiringSoon()) {
+
+            holder.imageExpiryNotification.setVisibility(View.VISIBLE);
+
+        } else {
+
+            holder.imageExpiryNotification.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(v -> {listener.onPantryItemClick(item);});
     }
 
@@ -66,6 +75,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         TextView textViewExpiry;
         ImageView imageViewEdit;
 
+        ImageView  imageExpiryNotification;
+
         public PantryViewHolder(View itemView) {
             super(itemView);
 
@@ -73,6 +84,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
             textViewQuantity = itemView.findViewById(R.id.textViewPantryItemQuantity);
             textViewExpiry = itemView.findViewById(R.id.textViewPantryItemExpiry);
             imageViewEdit = itemView.findViewById(R.id.imageEditPantryItem);
+
+            imageExpiryNotification = itemView.findViewById(R.id.imageExpiryNotification);
         }
     }
 

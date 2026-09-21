@@ -9,7 +9,8 @@ public class PantryItem {
     private String dtExpiryDate;
 
     // For frontend
-    private String MeasurementName;
+    private String measurementName;
+    private boolean expiringSoon = false;
 
     public PantryItem() {
 
@@ -70,10 +71,19 @@ public class PantryItem {
     }
 
     public void setMeasurementName(String measurementName) {
-        this.MeasurementName = measurementName;
+        this.measurementName = measurementName;
     }
 
     public String getMeasurementName() {
-        return MeasurementName;
+        return measurementName;
+    }
+
+    // Expiring Notification
+    public boolean isExpiringSoon() {
+        return expiringSoon;
+    }
+
+    public void setExpiringSoon(boolean expiringSoon) {
+        this.expiringSoon = expiringSoon;
     }
 }

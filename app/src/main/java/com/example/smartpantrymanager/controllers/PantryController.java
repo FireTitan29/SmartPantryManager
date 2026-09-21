@@ -10,7 +10,9 @@ import com.example.smartpantrymanager.services.AppSettingsService;
 import com.example.smartpantrymanager.services.MeasurementService;
 import com.example.smartpantrymanager.services.PantryService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PantryController {
@@ -69,6 +71,27 @@ public class PantryController {
                 } else {
 
                     item.setMeasurementName(" Units");
+                }
+
+                if (appSettingsService.getAppSettings().getSetting("Notifications").equals("On")) {
+
+                    // Notification of expiring food items in pantry logic
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                    dateFormat.setLenient(false);
+
+                    Date expireDate = dateFormat.parse(item.getExpiryDate());
+                    Date todayDate = dateFormat.parse(dateFormat.format(new Date()));
+
+                    long difference = expireDate.getTime() - todayDate.getTime();
+                    long daysUntilExpiry = difference / (1000 * 60 * 60 * 24);
+
+                    // used for the notification icon in the pantry activity
+                    if (daysUntilExpiry >= 0 && daysUntilExpiry <= 7) {
+
+                        item.setExpiringSoon(true);
+
+                    }
                 }
 
                 formattedItems.add(item);

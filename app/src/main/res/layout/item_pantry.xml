@@ -34,15 +34,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewPantryItemName" />
 
+    <ImageView
+        android:id="@+id/imageExpiryNotification"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="Expiring soon"
+        android:src="@drawable/ic_expire_notification"
+        app:tint="#FF9800"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPantryItemQuantity" />
+
     <TextView
         android:id="@+id/textViewPantryItemExpiry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:text="Expires 25 Sep"
         android:textColor="#7A857D"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageExpiryNotification"
         app:layout_constraintTop_toBottomOf="@id/textViewPantryItemQuantity" />
 
     <ImageView
