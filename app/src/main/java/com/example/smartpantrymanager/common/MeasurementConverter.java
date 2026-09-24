@@ -40,7 +40,6 @@ public final class MeasurementConverter {
         int modifyBy = 0;
 
         // Multiply / divide by 1000 to get to the correct measurement value
-
         if (measurement_index <= appsetting_index) {
 
             modifyBy = appsetting_index - measurement_index;
@@ -82,7 +81,7 @@ public final class MeasurementConverter {
             measurementIndex = weight.indexOf(measurement);
             databaseIndex = weight.indexOf("g");
 
-            // Convert Volume to millilitres
+        // Convert Volume to millilitres
         } else if (volume.contains(measurement)) {
 
             measurementIndex = volume.indexOf(measurement);
@@ -95,7 +94,7 @@ public final class MeasurementConverter {
 
         int modifyBy;
 
-        // Going from larger → smaller
+        // Going from larger to smaller
         if (measurementIndex < databaseIndex) {
 
             modifyBy = databaseIndex - measurementIndex;
@@ -104,7 +103,7 @@ public final class MeasurementConverter {
                 value *= 1000;
             }
 
-        // Going from smaller → larger
+        // Going from smaller to larger
         } else {
 
             modifyBy = measurementIndex - databaseIndex;

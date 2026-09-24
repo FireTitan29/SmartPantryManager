@@ -14,8 +14,6 @@ import com.example.smartpantrymanager.controllers.SuggestedRecipesController;
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.models.Recipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class SuggestedRecipesActivity extends AppCompatActivity {
@@ -25,6 +23,9 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
     private  TextView textViewRecipesSubtitle;
+    private  TextView textViewNearMatches;
+
+    private boolean getNearMatches = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,26 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setSelectedItemId(R.id.navigation_recipes);
+
+        textViewRecipesSubtitle = findViewById(R.id.textViewRecipesSubtitle);
+        textViewNearMatches = findViewById(R.id.textViewNearMatches);
+
+        // Near Matches Text view clickable
+        textViewNearMatches.setOnClickListener(v -> {
+
+            getNearMatches = !getNearMatches;
+
+            loadRecipes();
+
+            if (getNearMatches) {
+
+                textViewNearMatches.setText("View Strictly Matching Recipes");
+
+            } else {
+
+                textViewNearMatches.setText("View Near Matches");
+            }
+        });
 
         // Navigation bar logic
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -71,14 +92,23 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
 
     private void loadRecipes() {
 
-        List<Recipe> recipes = suggestedRecipesController.getRecipes();
+        List<Recipe> recipes = suggestedRecipesController.getRecipes(getNearMatches);
         // List<Recipe> recipes = new ArrayList<>();
 
         // UI Change to inform user that they don't have any matching recipes
+        if (getNearMatches) {
+
+            textViewRecipesSubtitle.setText("Recipes you are almost ready to make");
+
+        } else {
+
+            textViewRecipesSubtitle.setText("Find something delicious to make");
+        }
+
+
         if(recipes.isEmpty()) {
 
-            textViewRecipesSubtitle = findViewById(R.id.textViewRecipesSubtitle);
-            textViewRecipesSubtitle.setText("No recipes match your pantry yet - add more ingredients to your pantry");
+            textViewRecipesSubtitle.setText("No strictly matched recipes match your pantry yet - add more ingredients to your pantry");
 
         }
 

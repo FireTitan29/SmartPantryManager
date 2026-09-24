@@ -30,9 +30,8 @@ public class SuggestedRecipesController {
         measurementService = new MeasurementService(databaseHelper);
     }
 
-    // Gets all of the recipes that match whats in your pantry
-    public List<Recipe> getRecipes() {
-
+    // Gets all of the recipes that match what's in your pantry
+    public List<Recipe> getRecipes(boolean getNearMatches) {
 
         List<Recipe> allRecipes = recipeService.getActiveRecipes();
         List<PantryItem> allPantryItems = pantryController.getPantryItems();
@@ -140,7 +139,12 @@ public class SuggestedRecipesController {
                 }
             }
 
-            if (matches == ingredientsSize) {
+            if (matches == ingredientsSize && !getNearMatches) {
+
+                matchingRecipes.add(recipeLookup.get(recipeId));
+
+            // Near Matching is when we are missing just one ingredient in our pantry
+            } else if (matches == ingredientsSize-1 && getNearMatches) {
 
                 matchingRecipes.add(recipeLookup.get(recipeId));
             }
