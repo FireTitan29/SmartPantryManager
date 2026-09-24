@@ -89,7 +89,7 @@ public class PantryController {
                         long daysUntilExpiry = difference / (1000 * 60 * 60 * 24);
 
                         // used for the notification icon in the pantry activity
-                        if (daysUntilExpiry >= 0 && daysUntilExpiry <= 7) {
+                        if (daysUntilExpiry <= 7) {
 
                             item.setExpiringSoon(true);
 
