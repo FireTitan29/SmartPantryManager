@@ -50,7 +50,7 @@ public class PantryController {
                 Measurement itemMeasurement = measurements.stream()
                         .filter(m -> m.getPrimaryKey() == item.getMeasurementId())
                         .findFirst()
-                        .orElseThrow();
+                        .orElse(null);
 
                 float newValue = MeasurementConverter.convert(itemMeasurement.getAbbreviation(), appSettingsService, item.getQuantity());
 
@@ -80,17 +80,20 @@ public class PantryController {
 
                     dateFormat.setLenient(false);
 
-                    Date expireDate = dateFormat.parse(item.getExpiryDate());
-                    Date todayDate = dateFormat.parse(dateFormat.format(new Date()));
+                    if (item.getExpiryDate() != null && !item.getExpiryDate().isEmpty()) {
 
-                    long difference = expireDate.getTime() - todayDate.getTime();
-                    long daysUntilExpiry = difference / (1000 * 60 * 60 * 24);
+                        Date expireDate = dateFormat.parse(item.getExpiryDate());
+                        Date todayDate = dateFormat.parse(dateFormat.format(new Date()));
 
-                    // used for the notification icon in the pantry activity
-                    if (daysUntilExpiry >= 0 && daysUntilExpiry <= 7) {
+                        long difference = expireDate.getTime() - todayDate.getTime();
+                        long daysUntilExpiry = difference / (1000 * 60 * 60 * 24);
 
-                        item.setExpiringSoon(true);
+                        // used for the notification icon in the pantry activity
+                        if (daysUntilExpiry >= 0 && daysUntilExpiry <= 7) {
 
+                            item.setExpiringSoon(true);
+
+                        }
                     }
                 }
 

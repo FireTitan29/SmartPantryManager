@@ -111,7 +111,23 @@ public class AddEditPantryItemsController {
             pantryItem.setQuantity(quantity);
 
             // Set the database measurement
-            int databaseMeasurementId =  measurementService.getMeasurementId(measurementAbbreviation);
+            // Set the database measurement
+            String databaseMeasurement;
+
+            if (MeasurementConverter.isVolumeMetric(measurementAbbreviation)) {
+
+                databaseMeasurement = "ml";
+
+            } else if (MeasurementConverter.isWeightMetric(measurementAbbreviation)) {
+
+                databaseMeasurement = "g";
+
+            } else {
+
+                databaseMeasurement = "Units";
+            }
+
+            int databaseMeasurementId = measurementService.getMeasurementId(databaseMeasurement);
 
             pantryItem.setMeasurementId(databaseMeasurementId);
 
@@ -156,7 +172,22 @@ public class AddEditPantryItemsController {
             pantryItem.setQuantity(quantity);
 
             // Set the database measurement
-            int databaseMeasurementId = measurementService.getMeasurementId(measurementAbbreviation);
+            String databaseMeasurement;
+
+            if (MeasurementConverter.isVolumeMetric(measurementAbbreviation)) {
+
+                databaseMeasurement = "ml";
+
+            } else if (MeasurementConverter.isWeightMetric(measurementAbbreviation)) {
+
+                databaseMeasurement = "g";
+
+            } else {
+
+                databaseMeasurement = "Units";
+            }
+
+            int databaseMeasurementId = measurementService.getMeasurementId(databaseMeasurement);
 
             pantryItem.setMeasurementId(databaseMeasurementId);
 
